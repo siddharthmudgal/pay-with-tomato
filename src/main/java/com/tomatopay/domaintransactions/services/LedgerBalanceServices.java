@@ -23,17 +23,20 @@ public class LedgerBalanceServices {
 
     public void updateBalance(TransactionDO transactionDO) {
 
-        Optional<LedgerBalanceDO> ledgerBalanceDOOptional = ledgerBalanceRepository.findById(transactionDO.getAccountId());
+        Optional<LedgerBalanceDO> ledgerBalanceDOOptional = ledgerBalanceRepository
+                .findById(transactionDO.getAccountId());
+
+        LedgerBalanceDO ledgerBalanceDO = null;
 
         if (ledgerBalanceDOOptional.isEmpty()) {
 
-            LedgerBalanceDO ledgerBalanceDO = new LedgerBalanceDO(
-                    transactionDO.getAccountId(), transactionDO.getAmount()
+            ledgerBalanceDO = new LedgerBalanceDO(
+                    transactionDO.getAccountId(), new BigDecimal("0.0")
             );
             ledgerBalanceRepository.save(ledgerBalanceDO);
-            return;
+        } else {
+            ledgerBalanceDO = ledgerBalanceDOOptional.get();
         }
-        LedgerBalanceDO ledgerBalanceDO = ledgerBalanceDOOptional.get();
 
         BigDecimal currentBalance = ledgerBalanceDO.getBalance();
 
