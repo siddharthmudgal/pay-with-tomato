@@ -1,10 +1,12 @@
-package com.tomatopay.domaintransactions.respositories.controllers;
+package com.tomatopay.domaintransactions.respositories.sql.controllers;
 
-import com.tomatopay.domaintransactions.domainobjects.TransactionDO;
-import com.tomatopay.domaintransactions.respositories.TransactionRepository;
+import com.tomatopay.domaintransactions.constants.KafkaConstants;
+import com.tomatopay.domaintransactions.domainobjects.sql.TransactionDO;
+import com.tomatopay.domaintransactions.respositories.sql.TransactionRepository;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +25,11 @@ public class TransactionRepositoryRestController {
 
     private final TransactionRepository transactionRepository;
 
-    public TransactionRepositoryRestController(TransactionRepository transactionRepository) {
+    private final KafkaTemplate<String, TransactionDO> kafkaTemplate;
+
+    public TransactionRepositoryRestController(TransactionRepository transactionRepository, KafkaTemplate<String, TransactionDO> kafkaTemplate) {
         this.transactionRepository = transactionRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     /** POST transactions handler
@@ -49,6 +54,8 @@ public class TransactionRepositoryRestController {
                 .path("/{id}")
                 .buildAndExpand(transactionDO.getId())
                 .toUri();
+
+        kafkaTemplate.send(KafkaConstants.TOPICS_LEDGER_BALANCE, transactionDO);
 
         return ResponseEntity.created(location).build();
     }
