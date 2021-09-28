@@ -1,5 +1,6 @@
 package com.tomatopay.domaintransactions.configurations;
 
+import com.tomatopay.domaintransactions.constants.KafkaConstants;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,6 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("ledger-balance", 1, (short) 1);
+        return new NewTopic(KafkaConstants.TOPICS_LEDGER_BALANCE, 1, (short) 1);
     }
 }
