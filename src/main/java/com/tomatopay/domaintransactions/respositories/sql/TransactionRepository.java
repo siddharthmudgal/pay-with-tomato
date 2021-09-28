@@ -1,6 +1,6 @@
-package com.tomatopay.domaintransactions.respositories;
+package com.tomatopay.domaintransactions.respositories.sql;
 
-import com.tomatopay.domaintransactions.domainobjects.TransactionDO;
+import com.tomatopay.domaintransactions.domainobjects.sql.TransactionDO;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

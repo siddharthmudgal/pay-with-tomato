@@ -1,7 +1,7 @@
 package com.tomatopay.domaintransactions.configurations;
 
 import com.tomatopay.domaintransactions.constants.KafkaConstants;
-import com.tomatopay.domaintransactions.domainobjects.TransactionDO;
+import com.tomatopay.domaintransactions.domainobjects.sql.TransactionDO;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

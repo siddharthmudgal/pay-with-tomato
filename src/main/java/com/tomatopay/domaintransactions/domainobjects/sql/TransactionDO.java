@@ -1,4 +1,4 @@
-package com.tomatopay.domaintransactions.domainobjects;
+package com.tomatopay.domaintransactions.domainobjects.sql;
 
 import com.tomatopay.domaintransactions.constants.TransactionTypeEnum;
 import lombok.*;

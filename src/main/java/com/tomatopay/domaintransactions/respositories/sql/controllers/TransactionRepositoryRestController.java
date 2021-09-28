@@ -1,9 +1,8 @@
-package com.tomatopay.domaintransactions.respositories.controllers;
+package com.tomatopay.domaintransactions.respositories.sql.controllers;
 
 import com.tomatopay.domaintransactions.constants.KafkaConstants;
-import com.tomatopay.domaintransactions.domainobjects.TransactionDO;
-import com.tomatopay.domaintransactions.respositories.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tomatopay.domaintransactions.domainobjects.sql.TransactionDO;
+import com.tomatopay.domaintransactions.respositories.sql.TransactionRepository;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
