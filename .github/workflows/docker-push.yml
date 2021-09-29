@@ -1,12 +1,12 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 
-name: TomatoPay CICD
+name: Push to docker hub
 
 on:
   push:
-    branches: [ $default-branch, develop ]
+    branches: [ release ]
   pull_request:
-    branches: [ $default-branch, develop ]
+    branches: [ release ]
 
 jobs:
   build:
@@ -31,3 +31,9 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Publish to Docker Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: smudgal/pay-with-a-tomato:0.0.1
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
