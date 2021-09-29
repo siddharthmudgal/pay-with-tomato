@@ -31,3 +31,9 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Publish to Docker Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: smudgal/pay-with-a-tomato:0.0.1
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
